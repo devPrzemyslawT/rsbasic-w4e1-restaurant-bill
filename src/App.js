@@ -8,6 +8,7 @@ function App() {
 				<h1> Bill calculator </h1>
 				<h2> Calculate yours bill!</h2>
 			</div>
+			<div className='App-line'></div>
 			<div className='App-body'>
 				<form>
 					<p>Value</p>
