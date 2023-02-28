@@ -3,7 +3,7 @@ import React from "react";
 import "./Button.css";
 
 const Button = props => {
-	const { label, handleOnClick } = props;
+	const { label, type, handleOnClick } = props;
 
 	return (
 		<button className='button' onClick={handleOnClick}>

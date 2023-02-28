@@ -24,7 +24,8 @@ const CostForm = () => {
 		billState: true,
 	});
 
-	const handleOnCalculateButton = e => {
+	const handleOnSubmit = e => {
+		e.preventDefault();
 		const result = CalcTotalCost(
 			formState.billCost,
 			formState.billTax,
@@ -54,7 +55,7 @@ const CostForm = () => {
 	};
 
 	const FormClear = (
-		<form onChange={handleOnFormChange}>
+		<form onSubmit={handleOnSubmit} onChange={handleOnFormChange}>
 			<Paragraph label='Cost:'></Paragraph>
 			<InNumber placeholder='Enter yours cost...' name='billCost'></InNumber>
 
@@ -70,17 +71,15 @@ const CostForm = () => {
 				defaultValue={defaultTipElem}
 				name='billTip'></InSelect>
 
-			<Button
-				label='Calculate'
-				handleOnClick={handleOnCalculateButton}></Button>
+			<Button label='Calculate' type='submit'></Button>
 		</form>
 	);
 
 	const FormCompleted = (
-		<form>
+		<div>
 			<h3>{`Total cost =  ${formState.billTotalCost} $`}</h3>
 			<Button label='Return' handleOnClick={handleOnBackButton}></Button>
-		</form>
+		</div>
 	);
 
 	return <div>{formState.billState ? FormClear : FormCompleted}</div>;
