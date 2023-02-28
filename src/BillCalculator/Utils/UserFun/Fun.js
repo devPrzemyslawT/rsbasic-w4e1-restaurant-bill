@@ -9,5 +9,5 @@ const convToPercent = value => {
 export const CalcTotalCost = (cost, tax, tip) => {
 	let result = ConvToFloat(cost) + ConvToFloat(cost) * convToPercent(tax);
 	result = result + result * convToPercent(tip);
-	return result;
+	return result.toFixed(2);
 };

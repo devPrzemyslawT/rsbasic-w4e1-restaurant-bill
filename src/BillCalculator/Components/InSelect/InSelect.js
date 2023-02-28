@@ -5,7 +5,7 @@ import "./InSelect.css";
 const InSelect = props => {
 	const { selectData, defaultValue, handleValue } = props;
 	let localDefaultValue =
-		defaultValue < 0 || defaultValue > selectData.length ? 0 : defaultValue;
+		defaultValue < 0 || defaultValue > selectData.length ? 5 : defaultValue;
 	return (
 		<select
 			className='inSelect'

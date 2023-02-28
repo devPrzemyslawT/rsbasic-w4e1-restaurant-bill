@@ -7,15 +7,20 @@ import Paragraph from "../Components/Paragraph/Paragraph";
 import InSelect from "../Components/InSelect/InSelect";
 import InNumber from "../Components/InNumber/InNumer";
 
-import { arrTax, arrTip } from "../Utils/Data/data";
+import {
+	arrTax,
+	arrTip,
+	defaultTaxElem,
+	defaultTipElem,
+} from "../Utils/Data/data";
 import { CalcTotalCost } from "../Utils/UserFun/Fun";
 
 const CostForm = () => {
 	const [formState, setFormState] = useState(true);
 	const [costValue, setCostValue] = useState(0);
 	const [totalValue, setTotalValue] = useState(0);
-	const [tipValue, setTipValue] = useState(5);
-	const [taxValue, setTaxValue] = useState(5);
+	const [tipValue, setTipValue] = useState(arrTip[defaultTipElem]);
+	const [taxValue, setTaxValue] = useState(arrTax[defaultTaxElem]);
 
 	const handleOnCalculateButton = e => {
 		setTotalValue(CalcTotalCost(costValue, taxValue, tipValue));
@@ -23,8 +28,10 @@ const CostForm = () => {
 	};
 
 	const handleOnBackButton = e => {
-		setCostValue(5);
-		setTotalValue(5);
+		setTipValue(arrTip[defaultTipElem]);
+		setTaxValue(arrTax[defaultTaxElem]);
+		setTotalValue(0);
+		setCostValue(0);
 		setFormState(true);
 	};
 
@@ -44,19 +51,19 @@ const CostForm = () => {
 			<InNumber
 				placeholder='Enter yours cost...'
 				onChangeValue={handleCostValue}></InNumber>
-			{/* <p>{costValue}</p> */}
+
 			<Paragraph label='Tax:'></Paragraph>
 			<InSelect
 				selectData={arrTax}
-				defaultValue='0'
+				defaultValue={defaultTaxElem}
 				handleValue={handleTaxValue}></InSelect>
-			{/* <p>{taxValue}</p> */}
+
 			<Paragraph label='Tip:'></Paragraph>
 			<InSelect
 				selectData={arrTip}
-				defaultValue='0'
+				defaultValue={defaultTipElem}
 				handleValue={handleTipValue}></InSelect>
-			{/* <p>{tipValue}</p> */}
+
 			<Button
 				label='Calculate'
 				handleOnClick={handleOnCalculateButton}></Button>
@@ -66,7 +73,7 @@ const CostForm = () => {
 	const FormCompleted = (
 		<form>
 			<h3>{`Total cost =  ${totalValue} $`}</h3>
-			<Button label='Back' handleOnClick={handleOnBackButton}></Button>
+			<Button label='Return' handleOnClick={handleOnBackButton}></Button>
 		</form>
 	);
 
