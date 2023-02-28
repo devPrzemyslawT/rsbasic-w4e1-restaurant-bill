@@ -3,11 +3,18 @@ import React from "react";
 import "./InSelect.css";
 
 const InSelect = props => {
+	const { selectData, defaultValue } = props;
+	let localDefaultValue =
+		defaultValue < 0 || defaultValue > selectData.length ? 0 : defaultValue;
 	return (
-		<select className='inSelect'>
-			<option value='5'>5%</option>
-			<option value='8'>8%</option>
-			<option value='23'>23%</option>
+		<select className='inSelect' defaultValue={selectData[localDefaultValue]}>
+			{selectData.map(elem => {
+				return (
+					<option key={elem.toString()} value={elem}>
+						{elem}%
+					</option>
+				);
+			})}
 		</select>
 	);
 };

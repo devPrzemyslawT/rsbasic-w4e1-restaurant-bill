@@ -22,7 +22,7 @@ function App() {
 						<button>Submit</button>
 					</div>
 				</form>
-					<img src={logo} className='App-logo' alt='logo' />
+				<img src={logo} className='App-logo' alt='logo' />
 			</div>
 		</div>
 	);
