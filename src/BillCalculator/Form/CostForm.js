@@ -16,53 +16,59 @@ import {
 import { CalcTotalCost } from "../Utils/UserFun/Fun";
 
 const CostForm = () => {
-	const [formState, setFormState] = useState(true);
-	const [costValue, setCostValue] = useState(0);
-	const [totalValue, setTotalValue] = useState(0);
-	const [tipValue, setTipValue] = useState(arrTip[defaultTipElem]);
-	const [taxValue, setTaxValue] = useState(arrTax[defaultTaxElem]);
+	const [formState, setFormState] = useState({
+		billCost: 0,
+		billTotalCost: 0,
+		billTax: arrTax[defaultTaxElem],
+		billTip: arrTip[defaultTipElem],
+		billState: true,
+	});
 
 	const handleOnCalculateButton = e => {
-		setTotalValue(CalcTotalCost(costValue, taxValue, tipValue));
-		setFormState(false);
+		const result = CalcTotalCost(
+			formState.billCost,
+			formState.billTax,
+			formState.billTip
+		);
+		setFormState({
+			billTotalCost: result,
+			billState: false,
+		});
 	};
 
 	const handleOnBackButton = e => {
-		setTipValue(arrTip[defaultTipElem]);
-		setTaxValue(arrTax[defaultTaxElem]);
-		setTotalValue(0);
-		setCostValue(0);
-		setFormState(true);
+		setFormState({
+			billCost: 0,
+			billTotalCost: 0,
+			billTax: arrTax[defaultTaxElem],
+			billTip: arrTip[defaultTipElem],
+			billState: true,
+		});
 	};
 
-	const handleCostValue = e => {
-		setCostValue(e.target.value);
+	const handleOnFormChange = e => {
+		setFormState({
+			...formState,
+			[e.target.name]: e.target.value,
+		});
 	};
 
-	const handleTaxValue = e => {
-		setTaxValue(e.target.value);
-	};
-	const handleTipValue = e => {
-		setTipValue(e.target.value);
-	};
 	const FormClear = (
-		<form>
+		<form onChange={handleOnFormChange}>
 			<Paragraph label='Cost:'></Paragraph>
-			<InNumber
-				placeholder='Enter yours cost...'
-				onChangeValue={handleCostValue}></InNumber>
+			<InNumber placeholder='Enter yours cost...' name='billCost'></InNumber>
 
 			<Paragraph label='Tax:'></Paragraph>
 			<InSelect
 				selectData={arrTax}
 				defaultValue={defaultTaxElem}
-				handleValue={handleTaxValue}></InSelect>
+				name='billTax'></InSelect>
 
 			<Paragraph label='Tip:'></Paragraph>
 			<InSelect
 				selectData={arrTip}
 				defaultValue={defaultTipElem}
-				handleValue={handleTipValue}></InSelect>
+				name='billTip'></InSelect>
 
 			<Button
 				label='Calculate'
@@ -72,12 +78,12 @@ const CostForm = () => {
 
 	const FormCompleted = (
 		<form>
-			<h3>{`Total cost =  ${totalValue} $`}</h3>
+			<h3>{`Total cost =  ${formState.billTotalCost} $`}</h3>
 			<Button label='Return' handleOnClick={handleOnBackButton}></Button>
 		</form>
 	);
 
-	return <div>{formState ? FormClear : FormCompleted}</div>;
+	return <div>{formState.billState ? FormClear : FormCompleted}</div>;
 };
 
 export default CostForm;
