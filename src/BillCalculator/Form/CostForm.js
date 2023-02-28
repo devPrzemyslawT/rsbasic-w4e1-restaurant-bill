@@ -71,7 +71,7 @@ const CostForm = () => {
 				defaultValue={defaultTipElem}
 				name='billTip'></InSelect>
 
-			<Button label='Calculate' type='submit'></Button>
+			<Button label='Calculate' buttonType='submit'></Button>
 		</form>
 	);
 
