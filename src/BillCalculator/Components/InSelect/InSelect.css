@@ -1,0 +1,9 @@
+.inSelect {
+	width: 80%;
+	height: 30px;
+	font-size: 22px;
+	background-color: #ddd;
+	color: #243763;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+}

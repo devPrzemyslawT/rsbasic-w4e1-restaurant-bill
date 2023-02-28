@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Button from "./BillCalculator/Components/Button/Button";
 
 function App() {
 	return (
@@ -23,6 +22,7 @@ function App() {
 						<button>Submit</button>
 					</div>
 				</form>
+					<img src={logo} className='App-logo' alt='logo' />
 			</div>
 		</div>
 	);
